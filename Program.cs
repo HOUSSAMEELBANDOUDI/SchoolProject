@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using SchoolProject.Context;
+using SchoolProject.Repository;
+using SchoolProject.Repository.Student;
+using SchoolProject.Repository.Teacher;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +12,10 @@ builder.Services.AddControllersWithViews();
 // Configure Entity Framework with SQL Server
 builder.Services.AddDbContext<MyDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Dependency Injection
+builder.Services.AddTransient<IStudentRepository, StudentRepository>();
+builder.Services.AddTransient<ITeacherRepository, TeacherRepository>();
 
 var app = builder.Build();
 
