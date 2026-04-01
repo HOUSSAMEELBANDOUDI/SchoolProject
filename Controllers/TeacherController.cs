@@ -34,8 +34,10 @@ namespace SchoolProject.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET: /Teacher/Delete/5 — Delete teacher
-        public IActionResult Delete(int id)
+        // POST: /Teacher/Delete/5 — Delete teacher with confirmation
+        [HttpPost]
+        [ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int id)
         {
             _TeacherRepository.Delete(id);
             return RedirectToAction("Index");

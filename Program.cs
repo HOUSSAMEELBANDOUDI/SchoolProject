@@ -3,6 +3,8 @@ using SchoolProject.Context;
 using SchoolProject.Repository;
 using SchoolProject.Repository.Student;
 using SchoolProject.Repository.Teacher;
+using SchoolProject.Repository.Room;
+using SchoolProject.Repository.Course;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,8 @@ builder.Services.AddDbContext<MyDbContext>(options =>
 // Dependency Injection
 builder.Services.AddTransient<IStudentRepository, StudentRepository>();
 builder.Services.AddTransient<ITeacherRepository, TeacherRepository>();
+builder.Services.AddTransient<IRoomRepository, RoomRepository>();
+builder.Services.AddTransient<ICourseRepository, CourseRepository>();
 
 var app = builder.Build();
 
