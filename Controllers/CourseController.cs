@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using SchoolProject.Context;
 using SchoolProject.Models;
 using SchoolProject.Repository.Course;
 
@@ -7,10 +9,12 @@ namespace SchoolProject.Controllers
     public class CourseController : Controller
     {
         private readonly ICourseRepository _CourseRepository;
+        private readonly MyDbContext _context;
 
-        public CourseController(ICourseRepository courseRepository)
+        public CourseController(ICourseRepository courseRepository, MyDbContext context)
         {
             _CourseRepository = courseRepository;
+            _context = context;
         }
 
         // GET: /Course — Show all courses
@@ -20,9 +24,10 @@ namespace SchoolProject.Controllers
             return View(courses);
         }
 
-        // GET: /Course/Create — Show create form
+        // GET: /Course/Create — Show create form with teacher dropdown
         public IActionResult Create()
         {
+            ViewBag.Teachers = new SelectList(_context.Teachers.ToList(), "TeacherId", "TeacherName");
             return View();
         }
 

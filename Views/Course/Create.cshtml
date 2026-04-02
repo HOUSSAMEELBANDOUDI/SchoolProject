@@ -18,8 +18,10 @@
         <span asp-validation-for="CourseCapacity" class="text-danger"></span>
     </div>
     <div class="mb-3">
-        <label asp-for="TeacherId" class="form-label">Teacher ID</label>
-        <input asp-for="TeacherId" class="form-control" type="number" placeholder="Enter teacher ID" />
+        <label asp-for="TeacherId" class="form-label">Teacher</label>
+        <select asp-for="TeacherId" class="form-control" asp-items="@ViewBag.Teachers">
+            <option value="">-- Select Teacher --</option>
+        </select>
         <span asp-validation-for="TeacherId" class="text-danger"></span>
     </div>
     <button type="submit" class="btn btn-success">Save</button>
