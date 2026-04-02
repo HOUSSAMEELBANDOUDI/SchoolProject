@@ -1,0 +1,35 @@
+@model List<SchoolProject.Models.Teacher>
+
+@{
+    ViewData["Title"] = "Teachers";
+}
+
+<h2>Teachers</h2>
+
+<a asp-action="Create" class="btn btn-primary mb-3">Add New Teacher</a>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var teacher in Model)
+        {
+            <tr>
+                <td>@teacher.TeacherId</td>
+                <td>@teacher.TeacherName</td>
+                <td>@teacher.TeacherAge</td>
+                <td>
+                    <form asp-action="Delete" asp-route-id="@teacher.TeacherId" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

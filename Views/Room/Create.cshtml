@@ -1,0 +1,21 @@
+@model SchoolProject.Models.Room
+
+@{
+    ViewData["Title"] = "Add Room";
+}
+
+<h2>Add New Room</h2>
+
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label asp-for="RoomName" class="form-label">Room Name</label>
+        <input asp-for="RoomName" class="form-control" placeholder="Enter room name" />
+        <span asp-validation-for="RoomName" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-success">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

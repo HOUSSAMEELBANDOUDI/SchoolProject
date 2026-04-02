@@ -1,0 +1,26 @@
+@model SchoolProject.Models.Teacher
+
+@{
+    ViewData["Title"] = "Add Teacher";
+}
+
+<h2>Add New Teacher</h2>
+
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label asp-for="TeacherName" class="form-label">Name</label>
+        <input asp-for="TeacherName" class="form-control" placeholder="Enter teacher name" />
+        <span asp-validation-for="TeacherName" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="TeacherAge" class="form-label">Age</label>
+        <input asp-for="TeacherAge" class="form-control" type="number" placeholder="22 - 70" />
+        <span asp-validation-for="TeacherAge" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-success">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

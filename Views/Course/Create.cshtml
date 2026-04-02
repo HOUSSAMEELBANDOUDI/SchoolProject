@@ -1,0 +1,31 @@
+@model SchoolProject.Models.Course
+
+@{
+    ViewData["Title"] = "Add Course";
+}
+
+<h2>Add New Course</h2>
+
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label asp-for="CourseName" class="form-label">Course Name</label>
+        <input asp-for="CourseName" class="form-control" placeholder="Enter course name" />
+        <span asp-validation-for="CourseName" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="CourseCapacity" class="form-label">Capacity</label>
+        <input asp-for="CourseCapacity" class="form-control" type="number" placeholder="0 - 25" />
+        <span asp-validation-for="CourseCapacity" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="TeacherId" class="form-label">Teacher ID</label>
+        <input asp-for="TeacherId" class="form-control" type="number" placeholder="Enter teacher ID" />
+        <span asp-validation-for="TeacherId" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-success">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
