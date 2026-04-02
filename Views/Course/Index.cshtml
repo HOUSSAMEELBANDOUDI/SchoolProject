@@ -4,51 +4,34 @@
     ViewData["Title"] = "Courses";
 }
 
-<div class="data-card">
-    <div class="card-header">
-        <h5><i class="bi bi-book-fill" style="color: #ea580c;"></i> All Courses</h5>
-        <a asp-action="Create" class="btn btn-primary-custom btn-sm" style="background-color: #ea580c;">
-            <i class="bi bi-plus-lg"></i> Add Course
-        </a>
-    </div>
-    <table class="data-table">
-        <thead>
+<h2>Courses</h2>
+
+<a asp-action="Create" class="btn btn-primary mb-3">Add New Course</a>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Course Name</th>
+            <th>Capacity</th>
+            <th>Teacher</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var course in Model)
+        {
             <tr>
-                <th>#</th>
-                <th>Course Name</th>
-                <th>Capacity</th>
-                <th>Teacher</th>
-                <th>Actions</th>
+                <td>@course.CourseId</td>
+                <td>@course.CourseName</td>
+                <td>@course.CourseCapacity</td>
+                <td>@(course.Teacher != null ? course.Teacher.TeacherName : "N/A")</td>
+                <td>
+                    <form asp-action="Delete" asp-route-id="@course.CourseId" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                    </form>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @if (Model.Count == 0)
-            {
-                <tr>
-                    <td colspan="5" class="text-center text-muted py-4">
-                        <i class="bi bi-inbox" style="font-size: 2rem;"></i>
-                        <p class="mt-2">No courses yet. Add your first course!</p>
-                    </td>
-                </tr>
-            }
-            @foreach (var course in Model)
-            {
-                <tr>
-                    <td>@course.CourseId</td>
-                    <td><strong>@course.CourseName</strong></td>
-                    <td>
-                        <span class="badge-active">@course.CourseCapacity seats</span>
-                    </td>
-                    <td>@(course.Teacher != null ? course.Teacher.TeacherName : "N/A")</td>
-                    <td>
-                        <form asp-action="Delete" asp-route-id="@course.CourseId" method="post" style="display:inline;">
-                            <button type="submit" class="btn btn-danger-custom" onclick="return confirm('Are you sure you want to delete this course?')">
-                                <i class="bi bi-trash3"></i> Delete
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
+        }
+    </tbody>
+</table>
