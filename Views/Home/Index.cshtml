@@ -1,8 +1,69 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+@{
+    ViewData["Title"] = "Dashboard";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- STAT CARDS -->
+<div class="row g-4 mb-4">
+    <div class="col-md-3">
+        <a asp-controller="Student" asp-action="Index" class="stat-card">
+            <div class="stat-icon bg-blue">
+                <i class="bi bi-people-fill"></i>
+            </div>
+            <div class="stat-number">@ViewBag.StudentCount</div>
+            <div class="stat-label">Total Students</div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a asp-controller="Teacher" asp-action="Index" class="stat-card">
+            <div class="stat-icon bg-green">
+                <i class="bi bi-person-workspace"></i>
+            </div>
+            <div class="stat-number">@ViewBag.TeacherCount</div>
+            <div class="stat-label">Total Teachers</div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a asp-controller="Room" asp-action="Index" class="stat-card">
+            <div class="stat-icon bg-purple">
+                <i class="bi bi-door-open-fill"></i>
+            </div>
+            <div class="stat-number">@ViewBag.RoomCount</div>
+            <div class="stat-label">Total Rooms</div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a asp-controller="Course" asp-action="Index" class="stat-card">
+            <div class="stat-icon bg-orange">
+                <i class="bi bi-book-fill"></i>
+            </div>
+            <div class="stat-number">@ViewBag.CourseCount</div>
+            <div class="stat-label">Total Courses</div>
+        </a>
+    </div>
+</div>
+
+<!-- QUICK ACTIONS -->
+<div class="data-card mb-4">
+    <div class="card-header">
+        <h5><i class="bi bi-lightning-fill text-warning"></i> Quick Actions</h5>
+    </div>
+    <div class="p-3">
+        <div class="d-flex gap-2 flex-wrap">
+            <a asp-controller="Student" asp-action="Create" class="btn btn-primary-custom">
+                <i class="bi bi-person-plus"></i> Add Student
+            </a>
+            <a asp-controller="Teacher" asp-action="Create" class="btn btn-success-custom">
+                <i class="bi bi-person-plus"></i> Add Teacher
+            </a>
+            <a asp-controller="Room" asp-action="Create" class="btn btn-primary-custom" style="background-color: #9333ea;">
+                <i class="bi bi-door-open"></i> Add Room
+            </a>
+            <a asp-controller="Course" asp-action="Create" class="btn btn-primary-custom" style="background-color: #ea580c;">
+                <i class="bi bi-book"></i> Add Course
+            </a>
+            <a asp-controller="Student" asp-action="Register" class="btn btn-secondary-custom">
+                <i class="bi bi-person-check"></i> Register Student in Course
+            </a>
+        </div>
+    </div>
 </div>

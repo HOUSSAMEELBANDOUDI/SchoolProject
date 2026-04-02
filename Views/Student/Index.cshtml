@@ -4,35 +4,63 @@
     ViewData["Title"] = "Students";
 }
 
-<h2>Students</h2>
-
-<a asp-action="Create" class="btn btn-primary mb-3">Add New Student</a>
-<a asp-action="Register" class="btn btn-success mb-3 ms-2">Register Student in Course</a>
-
-<table class="table table-bordered table-striped">
-    <thead class="table-dark">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Active</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var student in Model)
-        {
+<div class="data-card">
+    <div class="card-header">
+        <h5><i class="bi bi-people-fill text-primary"></i> All Students</h5>
+        <div class="d-flex gap-2">
+            <a asp-action="Register" class="btn btn-success-custom btn-sm">
+                <i class="bi bi-person-check"></i> Register in Course
+            </a>
+            <a asp-action="Create" class="btn btn-primary-custom btn-sm">
+                <i class="bi bi-plus-lg"></i> Add Student
+            </a>
+        </div>
+    </div>
+    <table class="data-table">
+        <thead>
             <tr>
-                <td>@student.StudentId</td>
-                <td>@student.StudentName</td>
-                <td>@student.StudentAge</td>
-                <td>@(student.isActive ? "Yes" : "No")</td>
-                <td>
-                    <form asp-action="Delete" asp-route-id="@student.StudentId" method="post" style="display:inline;">
-                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
-                    </form>
-                </td>
+                <th>#</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Status</th>
+                <th>Actions</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @if (Model.Count == 0)
+            {
+                <tr>
+                    <td colspan="5" class="text-center text-muted py-4">
+                        <i class="bi bi-inbox" style="font-size: 2rem;"></i>
+                        <p class="mt-2">No students yet. Add your first student!</p>
+                    </td>
+                </tr>
+            }
+            @foreach (var student in Model)
+            {
+                <tr>
+                    <td>@student.StudentId</td>
+                    <td><strong>@student.StudentName</strong></td>
+                    <td>@student.StudentAge</td>
+                    <td>
+                        @if (student.isActive)
+                        {
+                            <span class="badge-active">Active</span>
+                        }
+                        else
+                        {
+                            <span class="badge-inactive">Inactive</span>
+                        }
+                    </td>
+                    <td>
+                        <form asp-action="Delete" asp-route-id="@student.StudentId" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-danger-custom" onclick="return confirm('Are you sure you want to delete this student?')">
+                                <i class="bi bi-trash3"></i> Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
