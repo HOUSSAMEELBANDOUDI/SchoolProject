@@ -1,0 +1,29 @@
+@{
+    ViewData["Title"] = "Register Student in Course";
+}
+
+<h2>Register Student in Course</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Register" method="post">
+            <div class="form-group mb-3">
+                <label class="form-label">Select Student</label>
+                <select name="studentId" class="form-control" asp-items="@ViewBag.Students">
+                    <option value="">-- Select Student --</option>
+                </select>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="form-label">Select Course</label>
+                <select name="courseId" class="form-control" asp-items="@ViewBag.Courses">
+                    <option value="">-- Select Course --</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-success">Register</button>
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </form>
+    </div>
+</div>

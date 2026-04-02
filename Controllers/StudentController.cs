@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using SchoolProject.Context;
 using SchoolProject.Models;
 using SchoolProject.Repository.Student;
 
@@ -7,11 +9,13 @@ namespace SchoolProject.Controllers
     public class StudentController : Controller
     {
         private readonly IStudentRepository _StudentRepository;
+        private readonly MyDbContext _context;
 
-        // Constructor — DI injects StudentRepository here
-        public StudentController(IStudentRepository studentRepository)
+        // Constructor — DI injects StudentRepository and DbContext here
+        public StudentController(IStudentRepository studentRepository, MyDbContext context)
         {
             _StudentRepository = studentRepository;
+            _context = context;
         }
 
         // GET: /Student — Show all students
@@ -44,7 +48,16 @@ namespace SchoolProject.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET: /Student/Register?studentId=1&courseId=3
+        // GET: /Student/Register — Show register form (select student + course)
+        public IActionResult Register()
+        {
+            ViewBag.Students = new SelectList(_context.Students.ToList(), "StudentId", "StudentName");
+            ViewBag.Courses = new SelectList(_context.Courses.ToList(), "CourseId", "CourseName");
+            return View();
+        }
+
+        // POST: /Student/Register — Save the registration
+        [HttpPost]
         public IActionResult Register(int studentId, int courseId)
         {
             _StudentRepository.register(studentId, courseId);
